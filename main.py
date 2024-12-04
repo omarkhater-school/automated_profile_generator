@@ -4,7 +4,7 @@ from langchain_chroma import Chroma
 from langchain.schema import Document
 import time
 from config_loader import load_config
-from utils import get_vectorstore, get_client, retrieve_skills_from_chroma, generate_profile
+from utils import get_vectorstore, get_client, retrieve_skills_from_chroma, generate_profile, chat_gpt
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -48,6 +48,57 @@ def retrieve_skills():
         profession = request.json.get("profession")
         keywords = retrieve_skills_from_chroma(profession)
         return jsonify({"keywords": keywords})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/health-check', methods=['GET'])
+def health_check():
+    """API endpoint to check the health of the system."""
+    try:
+        health_status = {}
+
+        # Check vector store health
+        try:
+            vectorstore_test_query = vectorstore.similarity_search("Machine Learning Engineer", k=1)
+            health_status["vector_store"] = {
+                "status": "healthy",
+                "message": f"Vector store contains {len(vectorstore_test_query)} results for test query."
+            }
+        except Exception as e:
+            health_status["vector_store"] = {
+                "status": "unhealthy",
+                "message": str(e)
+            }
+
+        # Check model availability
+        try:
+            prompt = "Test prompt for model health check."
+            model_response = chat_gpt(prompt, client)
+            health_status["model"] = {
+                "status": "healthy",
+                "message": "Model responded successfully."
+            }
+        except Exception as e:
+            health_status["model"] = {
+                "status": "unhealthy",
+                "message": str(e)
+            }
+
+        # Check configuration
+        try:
+            config_check = load_config()
+            health_status["configuration"] = {
+                "status": "healthy",
+                "message": "Configuration loaded successfully."
+            }
+        except Exception as e:
+            health_status["configuration"] = {
+                "status": "unhealthy",
+                "message": str(e)
+            }
+
+        return jsonify({"health": health_status}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

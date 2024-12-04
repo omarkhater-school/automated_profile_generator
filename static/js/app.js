@@ -109,3 +109,27 @@ document.getElementById("profile-form").addEventListener("submit", async functio
     }
 });
 
+
+document.getElementById("check-health").addEventListener("click", async function () {
+    const healthIndicators = document.getElementById("health-indicators");
+    healthIndicators.innerHTML = "<li>Checking system health...</li>";
+
+    try {
+        const response = await fetch("/api/health-check");
+        if (response.ok) {
+            const data = await response.json();
+            healthIndicators.innerHTML = "";
+
+            Object.entries(data.health).forEach(([key, value]) => {
+                const statusColor = value.status === "healthy" ? "green" : "red";
+                const li = document.createElement("li");
+                li.innerHTML = `<strong style="color: ${statusColor};">${key.toUpperCase()}:</strong> ${value.message}`;
+                healthIndicators.appendChild(li);
+            });
+        } else {
+            healthIndicators.innerHTML = "<li style='color: red;'>Health check failed. Please try again later.</li>";
+        }
+    } catch (error) {
+        healthIndicators.innerHTML = `<li style='color: red;'>Error: ${error.message}</li>`;
+    }
+});

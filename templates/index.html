@@ -8,67 +8,87 @@
 </head>
 <body>
     <div class="container">
-        <h1>Professional Profile Generator</h1>
-        
-        <!-- User Input Form -->
-        <form id="profile-form">
-            <!-- Target Description -->
-            <label for="target-goal">What is your target for this profile?</label>
-            <select id="target-goal" name="target-goal">
-                <option value="job_application">Applying for a Job</option>
-                <option value="linkedin_profile">Creating a LinkedIn Profile</option>
-                <option value="portfolio">Showcasing Projects for a Portfolio</option>
-                <option value="other">Other (custom)</option>
-            </select>
+        <!-- Header Section -->
+        <header>
+            <h1>Professional Profile Generator</h1>
+            <p>Create a personalized profile based on your profession and skills.</p>
+        </header>
 
-            <!-- Keywords Section -->
-            <label for="keywords">Skills/Technologies to Highlight (optional):</label>
-            <input type="text" id="keywords" name="keywords" placeholder="E.g., Python, Cloud Computing, Machine Learning">
+        <!-- Main Content Section -->
+        <div class="main-content">
+            <!-- Input Form Section -->
+            <section id="input-section" class="column">
+                <h2>Enter Your Details</h2>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="target-goal">What is your target for this profile?</label>
+                        <select id="target-goal" name="target-goal">
+                            <option value="job_application">Applying for a Job</option>
+                            <option value="linkedin_profile">Creating a LinkedIn Profile</option>
+                            <option value="portfolio">Showcasing Projects for a Portfolio</option>
+                            <option value="other">Other (custom)</option>
+                        </select>
+                    </div>
 
-            <!-- Resume Section -->
-            <label for="resume">Paste Your Resume (Optional):</label>
-            <textarea id="resume" name="resume" rows="6" placeholder="Paste your resume or key achievements here..."></textarea>
+                    <div class="form-group">
+                        <label for="profession">Profession:</label>
+                        <input type="text" id="profession" name="profession" required>
 
-            <label for="resume-upload">Or Upload Your Resume (Optional):</label>
-            <input type="file" id="resume-upload" name="resume-upload" accept=".pdf, .docx">
+                        <label for="experience-level">Experience Level:</label>
+                        <select id="experience-level" name="experience-level">
+                            <option value="junior">Junior</option>
+                            <option value="mid-level">Mid-Level</option>
+                            <option value="senior">Senior</option>
+                        </select>
+                    </div>
 
-            <!-- Profession and Experience -->
-            <label for="profession">Profession:</label>
-            <input type="text" id="profession" name="profession" required>
+                    <div class="form-group">
+                        <label for="keywords">Skills/Technologies to Highlight (optional):</label>
+                        <input type="text" id="keywords" name="keywords" placeholder="E.g., Python, Cloud Computing, Machine Learning">
+                    </div>
 
-            <label for="experience-level">Experience Level:</label>
-            <select id="experience-level" name="experience-level">
-                <option value="junior">Junior</option>
-                <option value="mid-level">Mid-Level</option>
-                <option value="senior">Senior</option>
-            </select>
+                    <div class="form-group">
+                        <label for="resume">Paste Your Resume (Optional):</label>
+                        <textarea id="resume" name="resume" rows="4" placeholder="Paste your resume or key achievements here..."></textarea>
 
-            <!-- Submit Button -->
-            <button type="submit">Generate Profile</button>
-            <div id="status" class="status">
-                <p>Status: <span id="status-message">Awaiting Input...</span></p>
-            </div>
-        </form>
+                        <label for="resume-upload">Or Upload Your Resume (Optional):</label>
+                        <input type="file" id="resume-upload" name="resume-upload" accept=".pdf, .docx">
+                    </div>
 
-        <!-- Output Area -->
-        <div id="output" style="display:none;">
-            <h2>Generated Profile</h2>
-            <div class="tabs">
-                <button class="tab-button active" data-tab="pitch">Elevator Pitch</button>
-                <button class="tab-button" data-tab="projects">Project Descriptions</button>
-            </div>
-            <div class="tab-content" id="tab-pitch">
-                <h3>Elevator Pitch</h3>
-                <p id="elevator-pitch"></p>
-            </div>
-            <div class="tab-content" id="tab-projects" style="display:none;">
-                <h3>Project Descriptions</h3>
-                <p id="project-descriptions"></p>
-            </div>
-            
-            
+                    <button type="submit">Generate Profile</button>
+                    <div id="status" class="status">
+                        <p>Status: <span id="status-message">Awaiting Input...</span></p>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Output and Health Section -->
+            <section id="output-section" class="column">
+                <!-- Generated Profile -->
+                <div id="output" style="display:none;">
+                    <h2>Generated Profile</h2>
+                    <div class="tabs">
+                        <button class="tab-button active" data-tab="pitch">Elevator Pitch</button>
+                        <button class="tab-button" data-tab="projects">Project Descriptions</button>
+                    </div>
+                    <div class="tab-content" id="tab-pitch">
+                        <h3>Elevator Pitch</h3>
+                        <p id="elevator-pitch"></p>
+                    </div>
+                    <div class="tab-content" id="tab-projects" style="display:none;">
+                        <h3>Project Descriptions</h3>
+                        <p id="project-descriptions"></p>
+                    </div>
+                </div>
+
+                <!-- System Health -->
+                <div id="health-section">
+                    <h2>System Health</h2>
+                    <ul id="health-indicators"></ul>
+                    <button id="check-health">Check Health</button>
+                </div>
+            </section>
         </div>
-
     </div>
 
     <script src="/static/js/app.js"></script>
