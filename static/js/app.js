@@ -62,52 +62,62 @@ document.getElementById("profile-form").addEventListener("submit", async functio
     e.preventDefault();
 
     // Collect form data
-    const profession = document.getElementById("profession").value;
-    const experienceLevel = document.getElementById("experience-level").value;
-    const keywords = document.getElementById("keywords").value.split(",").map(kw => kw.trim());
-
-    const requestData = {
-        profession: profession,
-        experience_level: experienceLevel,
-        keywords: keywords,
+    const formData = {
+        target_goal: document.getElementById("target-goal").value,
+        profession: document.getElementById("profession").value,
+        experience_level: document.getElementById("experience-level").value,
+        keywords: document.getElementById("keywords").value.split(",").map(kw => kw.trim()),
     };
 
-    try {
-        // Update status
-        updateStatus("Generating profile...");
+    // Update status
+    updateStatus("Generating profile...");
 
-        // Call the API
+    try {
         const response = await fetch("/api/generate-profile", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestData),
+            body: JSON.stringify(formData),
         });
 
-        // Handle the response
-        if (response.ok) {
-            const data = await response.json();
-            if (data.profile) {
-                // Update status to success
-                updateStatus("Profile successfully generated!");
+        const data = await response.json();
 
-                // Populate results in the UI
-                document.getElementById("elevator-pitch").textContent = data.profile.elevator_pitch;
-                document.getElementById("project-descriptions").textContent = data.profile.project_descriptions;
-                document.getElementById("output").style.display = "block";
-            } else {
-                // Handle unexpected API response
-                updateStatus("Error: Profile generation failed. Try again later.", true);
-            }
+        if (response.ok && data.profile) {
+            updateStatus("Profile generated successfully!");
+
+            // Populate selector with available profile elements
+            const selector = document.getElementById("profile-element-selector");
+            const profileContent = document.getElementById("profile-content");
+
+            selector.innerHTML = ""; // Clear previous options
+            profileContent.innerHTML = ""; // Clear previous content
+
+            Object.entries(data.profile).forEach(([key, value]) => {
+                // Add an option for each profile element
+                const option = document.createElement("option");
+                option.value = key;
+                option.textContent = key.replace(/_/g, " "); // Make it human-readable
+                selector.appendChild(option);
+            });
+
+            // Display the first profile element by default
+            selector.addEventListener("change", () => {
+                const selectedKey = selector.value;
+                profileContent.textContent = data.profile[selectedKey] || "No content available.";
+            });
+
+            // Trigger change to display first item
+            selector.dispatchEvent(new Event("change"));
+
+            // Show the output section
+            document.getElementById("output").style.display = "block";
         } else {
-            // Handle non-200 HTTP responses
-            const errorData = await response.json();
-            updateStatus(`Error: ${errorData.error || "Unexpected error occurred."}`, true);
+            updateStatus("Error: Unable to generate profile.");
         }
     } catch (error) {
-        // Handle network or other unexpected errors
-        updateStatus(`Error: ${error.message}`, true);
+        updateStatus(`Error: ${error.message}`);
     }
 });
+
 
 
 document.getElementById("check-health").addEventListener("click", async function () {

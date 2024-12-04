@@ -67,17 +67,12 @@
                 <!-- Generated Profile -->
                 <div id="output" style="display:none;">
                     <h2>Generated Profile</h2>
-                    <div class="tabs">
-                        <button class="tab-button active" data-tab="pitch">Elevator Pitch</button>
-                        <button class="tab-button" data-tab="projects">Project Descriptions</button>
-                    </div>
-                    <div class="tab-content" id="tab-pitch">
-                        <h3>Elevator Pitch</h3>
-                        <p id="elevator-pitch"></p>
-                    </div>
-                    <div class="tab-content" id="tab-projects" style="display:none;">
-                        <h3>Project Descriptions</h3>
-                        <p id="project-descriptions"></p>
+                    <label for="profile-element-selector">Select Profile Element:</label>
+                    <select id="profile-element-selector">
+                        <!-- Dynamically populated options -->
+                    </select>
+                    <div id="profile-content">
+                        <!-- Dynamic content will be displayed here -->
                     </div>
                 </div>
 
