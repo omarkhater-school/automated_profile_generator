@@ -66,6 +66,7 @@ def generate_user_profile():
                 "time_taken": round(end_time - start_time, 2)
             }
         }
+        print("Response being sent:", response)
         return jsonify(response)
     except Exception as e:
         return jsonify({"error": str(e)}), 500

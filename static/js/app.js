@@ -77,12 +77,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (profileUpgradeForm) {
         profileUpgradeForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-
+    
             // Collect input data
             const profession = document.getElementById("profession").value;
             const experienceLevel = document.getElementById("experience-level").value;
             const keywords = document.getElementById("keywords").value;
-
+    
             try {
                 // Call the API to generate the profile
                 const response = await fetch("/api/generate-profile", {
@@ -90,16 +90,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ profession, experience_level: experienceLevel, keywords: keywords.split(",") }),
+                    body: JSON.stringify({
+                        profession,
+                        experience_level: experienceLevel,
+                        keywords: keywords.split(","),
+                    }),
                 });
-
+    
                 const data = await response.json();
-
+    
+                console.log("Parsed Response:", data);
+    
                 if (response.ok) {
-                    // Display the generated profile
-                    outputSection.style.display = "block";
-                    elevatorPitchContent.innerHTML = data.profile.elevator_pitch;
-                    projectDescriptionsContent.innerHTML = data.profile.project_descriptions;
+                    // Check if the elements exist
+                    if (elevatorPitchContent && projectDescriptionsContent) {
+                        outputSection.style.display = "block";
+                        elevatorPitchContent.innerHTML = data.profile.elevator_pitch;
+                        projectDescriptionsContent.innerHTML = data.profile.project_descriptions;
+                    } else {
+                        console.error(
+                            "Error: Required elements for displaying profile are missing in the DOM."
+                        );
+                    }
                 } else {
                     alert(`Error: ${data.error}`);
                 }

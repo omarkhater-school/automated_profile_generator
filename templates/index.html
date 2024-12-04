@@ -3,63 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media Profile Upgrade</title>
+    <title>Professional Profile Generator</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Header Section -->
         <header>
-            <h1>Social Media Profile Upgrade</h1>
-            <p>Use AI to craft a compelling social media profile tailored to your profession and goals.</p>
+            <h1>Professional Profile Generator</h1>
+            <p>Use AI to enhance your social media profiles and build outstanding resumes effortlessly.</p>
         </header>
 
-        <!-- Input Form Section -->
-        <section>
-            <h2>Upgrade Your Profile</h2>
-            <form id="profile-upgrade-form" class="stylish-form">
-                <div class="form-group">
-                    <label for="profession">Profession:</label>
-                    <input type="text" id="profession" name="profession" placeholder="e.g., Software Engineer" required>
+        <!-- Features Section -->
+        <section class="features">
+            <h2>Features</h2>
+            <div class="feature-list">
+                <!-- Social Media Profile Upgrade -->
+                <div class="feature-card">
+                    <h3><a href="/social-profile-upgrade">Social Media Profile Upgrade</a></h3>
+                    <p>Enhance your LinkedIn or other social media profiles with AI-tailored descriptions.</p>
                 </div>
 
-                <div class="form-group">
-                    <label for="experience-level">Experience Level:</label>
-                    <select id="experience-level" name="experience-level">
-                        <option value="junior">Junior</option>
-                        <option value="mid-level">Mid-Level</option>
-                        <option value="senior">Senior</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="keywords">Keywords (optional):</label>
-                    <input type="text" id="keywords" name="keywords" placeholder="e.g., Python, Machine Learning">
-                </div>
-
-                <button type="submit" class="button">Generate Profile</button>
-            </form>
-        </section>
-
-        <!-- Output Section -->
-        <section id="output-section" style="display: none;">
-            <h2>Generated Profile</h2>
-            <div class="accordion">
-                <div class="accordion-item">
-                    <button class="accordion-button" type="button">Elevator Pitch</button>
-                    <div class="accordion-content" id="elevator-pitch-content"></div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-button" type="button">Project Descriptions</button>
-                    <div class="accordion-content" id="project-descriptions-content"></div>
+                <!-- Resume Builder (Coming Soon) -->
+                <div class="feature-card coming-soon">
+                    <h3><a href="/resume-upgrade">Resume Builder</a></h3>
+                    <p>Create optimized resumes using AI. Tailor them to specific roles and industries.</p>
+                    <span class="flag">Coming Soon</span>
                 </div>
             </div>
         </section>
 
-        <!-- Back to Home Button -->
-        <div class="button-container">
-            <a href="/" class="button">Back to Home</a>
-        </div>
+        <!-- System Health Section -->
+        <section class="health-check">
+            <h2>System Health</h2>
+            <p>Ensure everything is functioning as expected.</p>
+            <button id="check-health" class="button">Check Health</button>
+            <ul id="health-indicators" class="health-results"></ul>
+        </section>
+
+        <!-- Feedback Section -->
+        <section class="feedback">
+            <h2>Feedback</h2>
+            <p>We'd love to hear your thoughts on the Professional Profile Generator!</p>
+            <form id="feedback-form" method="post" action="/submit-feedback">
+                <!-- Star Rating -->
+                <div class="rating">
+                    <input type="radio" id="star5" name="stars" value="5">
+                    <label for="star5" title="5 stars">★</label>
+                    <input type="radio" id="star4" name="stars" value="4">
+                    <label for="star4" title="4 stars">★</label>
+                    <input type="radio" id="star3" name="stars" value="3">
+                    <label for="star3" title="3 stars">★</label>
+                    <input type="radio" id="star2" name="stars" value="2">
+                    <label for="star2" title="2 stars">★</label>
+                    <input type="radio" id="star1" name="stars" value="1">
+                    <label for="star1" title="1 star">★</label>
+                </div>
+
+                <!-- Comments -->
+                <textarea id="comments" name="comments" rows="4" placeholder="Share your feedback here..."></textarea>
+
+                <!-- Submit Button -->
+                <button type="submit" class="button">Submit Feedback</button>
+            </form>
+        </section>
     </div>
 
     <script src="/static/js/app.js"></script>
