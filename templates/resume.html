@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Upgrade</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Resume Upgrade</h1>
+            <p>Enhance your resume with advanced formatting and keyword optimization.</p>
+        </header>
+
+        <div class="button-container">
+            <a href="/" class="button">Back to Home</a>
+        </div>
+
+        <section>
+            <h2>Upload Your Resume</h2>
+            <form id="resume-upgrade-form">
+                <div class="form-group">
+                    <label for="resume-upload">Upload Your Resume (PDF or LaTeX):</label>
+                    <input type="file" id="resume-upload" name="resume-upload" accept=".pdf, .tex">
+                </div>
+
+                <div class="form-group">
+                    <label for="max-pages">Maximum Pages (Optional):</label>
+                    <input type="number" id="max-pages" name="max-pages" placeholder="E.g., 2">
+                </div>
+
+                <button type="submit">Upgrade Resume</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

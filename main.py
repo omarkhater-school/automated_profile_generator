@@ -22,6 +22,40 @@ def home():
     """Render the homepage."""
     return render_template('index.html')
 
+@app.route('/linkedin-profile')
+def linkedin_profile():
+    """Render the LinkedIn Profile page."""
+    return render_template('linkedin-profile.html')
+
+@app.route('/resume-upgrade')
+def resume_upgrade():
+    """Render the Resume Upgrade page."""
+    return render_template('resume.html')
+
+@app.route('/job-application')
+def job_application():
+    """Render the Job Application page."""
+    print("Rendering job-application.html")
+    return render_template('job-application.html')
+
+@app.route('/submit-feedback', methods=['POST'])
+def submit_feedback():
+    """Handle feedback submissions."""
+    try:
+        data = request.get_json()  # Retrieve JSON payload
+        stars = data.get("stars")
+        comments = data.get("comments")
+        
+        # Log the received feedback
+        print(f"Received feedback: {stars} stars, Comment: {comments}")
+
+        # Return a success response
+        return jsonify({"message": "Feedback submitted successfully!"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
 @app.route('/api/generate-profile', methods=['POST'])
 def generate_user_profile():
     """API endpoint to generate a professional profile."""
@@ -50,7 +84,6 @@ def retrieve_skills():
         return jsonify({"keywords": keywords})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 @app.route('/api/health-check', methods=['GET'])
 def health_check():

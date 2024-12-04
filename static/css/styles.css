@@ -1,148 +1,254 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
+    color: #333;
 }
 
 .container {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    grid-template-columns: 1fr;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 1rem;
+    max-width: 900px;
+    margin: 2rem auto;
     padding: 1rem;
-    background: #fff;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Header */
 header {
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 header h1 {
+    font-size: 2.5rem;
+    color: #007bff;
     margin-bottom: 0.5rem;
 }
 
 header p {
-    font-size: 1rem;
-    color: #666;
+    font-size: 1.2rem;
+    color: #555;
 }
 
-.main-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+/* Features Section */
+.features {
+    margin-bottom: 2rem;
 }
 
-.column {
+.features h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.feature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Feature Cards */
+.feature-card {
+    position: relative; /* Required for flag placement */
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     padding: 1rem;
-    background-color: #f8f9fa;
+    text-align: center;
+    width: 280px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card h3 a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.feature-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Coming Soon Flag */
+.feature-card .flag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.button {
+    display: inline-block;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+/* Health Check Section */
+.health-check {
+    background: #f5f5f5;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.health-check h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.health-check button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.health-check button:hover {
+    background-color: #0056b3;
+}
+
+.health-results {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.health-results li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.health-results li:last-child {
+    border-bottom: none;
+}
+
+/* Feedback Section */
+.feedback {
+    margin-top: 2rem;
+    background: #f5f5f5;
+    padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 8px;
 }
 
-h2 {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 0.5rem;
+.feedback h2 {
+    font-size: 1.5rem;
     margin-bottom: 1rem;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-input, select, textarea, button {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.status {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.tabs {
-    display: flex;
-    margin-bottom: 1rem;
-}
-
-.tab-button {
-    flex: 1;
-    padding: 0.5rem;
-    cursor: pointer;
     text-align: center;
-    border: 1px solid #ccc;
-    border-bottom: none;
-    background-color: #f1f1f1;
 }
 
-.tab-button.active {
-    background-color: white;
-    font-weight: bold;
-}
-
-.tab-content {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    background-color: #fff;
-}
-
-#health-section {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: #fdf4e3;
-    border: 1px solid #f1d7a6;
-    border-radius: 4px;
-}
-
-@media (max-width: 768px) {
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-}
-#profile-element-selector {
-    width: 100%;
-    padding: 0.5rem;
+.feedback p {
+    font-size: 1rem;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+    text-align: center;
 }
 
-#profile-content {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    min-height: 100px;
-    font-size: 1rem;
-    white-space: pre-wrap; /* Preserve formatting */
+#feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    direction: rtl; /* Align stars from right to left for proper highlighting */
+}
+
+.rating label {
+    font-size: 2rem;
+    color: #ddd; /* Default star color */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+/* Highlight stars on hover */
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #ffc107; /* Highlight color */
+}
+
+.rating input[type="radio"] {
+    display: none; /* Hide the actual radio buttons */
+}
+
+.rating input[type="radio"]:checked ~ label {
+    color: #ffc107;
+}
+
+/* Highlight stars when selected */
+.rating input[type="radio"]:checked ~ label {
+    color: #ffc107;
+}
+textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+textarea::placeholder {
+    color: #aaa;
+}
+
+.feedback .button {
+    margin-top: 1rem;
+    width: 200px;
+}
