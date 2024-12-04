@@ -9,29 +9,68 @@
 <body>
     <div class="container">
         <h1>Professional Profile Generator</h1>
+        
+        <!-- User Input Form -->
         <form id="profile-form">
+            <!-- Target Description -->
+            <label for="target-goal">What is your target for this profile?</label>
+            <select id="target-goal" name="target-goal">
+                <option value="job_application">Applying for a Job</option>
+                <option value="linkedin_profile">Creating a LinkedIn Profile</option>
+                <option value="portfolio">Showcasing Projects for a Portfolio</option>
+                <option value="other">Other (custom)</option>
+            </select>
+
+            <!-- Keywords Section -->
+            <label for="keywords">Skills/Technologies to Highlight (optional):</label>
+            <input type="text" id="keywords" name="keywords" placeholder="E.g., Python, Cloud Computing, Machine Learning">
+
+            <!-- Resume Section -->
+            <label for="resume">Paste Your Resume (Optional):</label>
+            <textarea id="resume" name="resume" rows="6" placeholder="Paste your resume or key achievements here..."></textarea>
+
+            <label for="resume-upload">Or Upload Your Resume (Optional):</label>
+            <input type="file" id="resume-upload" name="resume-upload" accept=".pdf, .docx">
+
+            <!-- Profession and Experience -->
             <label for="profession">Profession:</label>
             <input type="text" id="profession" name="profession" required>
-            
+
             <label for="experience-level">Experience Level:</label>
             <select id="experience-level" name="experience-level">
                 <option value="junior">Junior</option>
                 <option value="mid-level">Mid-Level</option>
                 <option value="senior">Senior</option>
             </select>
-            
-            <label for="keywords">Keywords (comma-separated):</label>
-            <input type="text" id="keywords" name="keywords">
-            
+
+            <!-- Submit Button -->
             <button type="submit">Generate Profile</button>
+            <div id="status" class="status">
+                <p>Status: <span id="status-message">Awaiting Input...</span></p>
+            </div>
         </form>
-        
+
+        <!-- Output Area -->
         <div id="output" style="display:none;">
             <h2>Generated Profile</h2>
-            <p><strong>Elevator Pitch:</strong> <span id="elevator-pitch"></span></p>
-            <p><strong>Project Descriptions:</strong> <span id="project-descriptions"></span></p>
+            <div class="tabs">
+                <button class="tab-button active" data-tab="pitch">Elevator Pitch</button>
+                <button class="tab-button" data-tab="projects">Project Descriptions</button>
+            </div>
+            <div class="tab-content" id="tab-pitch">
+                <h3>Elevator Pitch</h3>
+                <p id="elevator-pitch"></p>
+            </div>
+            <div class="tab-content" id="tab-projects" style="display:none;">
+                <h3>Project Descriptions</h3>
+                <p id="project-descriptions"></p>
+            </div>
+            
+            
         </div>
+
     </div>
+
     <script src="/static/js/app.js"></script>
 </body>
 </html>
