@@ -1,0 +1,12 @@
+settings:
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+  max_keywords: 30
+  row_limit: 50
+  embedding_model: "mxbai-embed-large"
+  collection_name: "job_skills"
+  batch_size: 10
+
+paths:
+  job_titles_csv: "./input/job_titles_diverse.csv"
+  job_skills_dataset: "./output/job_skills_dataset.csv"
+  persist_directory: "./chromadb_store"
