@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Profile Generator</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Professional Profile Generator</h1>
+        <form id="profile-form">
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" name="profession" required>
+            
+            <label for="experience-level">Experience Level:</label>
+            <select id="experience-level" name="experience-level">
+                <option value="junior">Junior</option>
+                <option value="mid-level">Mid-Level</option>
+                <option value="senior">Senior</option>
+            </select>
+            
+            <label for="keywords">Keywords (comma-separated):</label>
+            <input type="text" id="keywords" name="keywords">
+            
+            <button type="submit">Generate Profile</button>
+        </form>
+        
+        <div id="output" style="display:none;">
+            <h2>Generated Profile</h2>
+            <p><strong>Elevator Pitch:</strong> <span id="elevator-pitch"></span></p>
+            <p><strong>Project Descriptions:</strong> <span id="project-descriptions"></span></p>
+        </div>
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
