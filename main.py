@@ -22,21 +22,16 @@ def home():
     """Render the homepage."""
     return render_template('index.html')
 
-@app.route('/linkedin-profile')
-def linkedin_profile():
-    """Render the LinkedIn Profile page."""
-    return render_template('linkedin-profile.html')
+@app.route('/social-profile-upgrade')
+def social_profile_upgrade():
+    """Render the Social Media Profile Upgrade page."""
+    return render_template('social-profile-upgrade.html')
 
 @app.route('/resume-upgrade')
 def resume_upgrade():
     """Render the Resume Upgrade page."""
-    return render_template('resume.html')
-
-@app.route('/job-application')
-def job_application():
-    """Render the Job Application page."""
-    print("Rendering job-application.html")
-    return render_template('job-application.html')
+    print("Rendering resume upgrade")
+    return render_template('resume-upgrade.html')
 
 @app.route('/submit-feedback', methods=['POST'])
 def submit_feedback():
