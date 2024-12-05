@@ -103,7 +103,12 @@ def generate_profile(user_input, vectorstore, client):
     user_keywords = user_input.get("keywords", [])
     background = user_input.get("background", "").strip()  # Optional user-provided background
 
-    trending_keywords = retrieve_skills_from_chroma(profession, vectorstore)
+    # Higher similarity_score_input means a stricter threshold (fewer keywords)
+    threshold_similarity = int(user_input.get("similarity_score_input", 50))
+    threshold_relevance = 1 - (threshold_similarity / 100)
+
+    trending_keywords = retrieve_skills_from_chroma(
+        profession, vectorstore, threshold = threshold_relevance)
     if not trending_keywords:
         print(f"Fetching trending keywords for {profession}...")
         headers = {"User-Agent": user_input.get("headers")}
