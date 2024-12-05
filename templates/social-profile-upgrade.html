@@ -44,11 +44,12 @@
 
                 <!-- Similarity Score Sliding Bar -->
                 <div class="form-group">
-                    <label for="similarity-score">Similarity Score (0-100):</label>
-                    <input type="range" id="similarity-score" name="similarity-score" min="0" max="100" value="50" 
-                           oninput="document.getElementById('similarity-value').textContent = this.value">
+                    <label for="similarity-score">Similarity Score Threshold (0-100):</label>
+                    <input type="range" id="similarity-score" name="similarity-score" min="0" max="100" value="50"
+                           oninput="updateSliderLabel(this.value)">
                     <span id="similarity-value">50</span>
-                </div>
+                    <small id="slider-description">Low threshold = More keywords</small>
+                </div>                
 
                 <button type="submit" class="button">Generate Profile</button>
             </form>

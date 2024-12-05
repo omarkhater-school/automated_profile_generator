@@ -89,7 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const experienceLevel = document.getElementById("experience-level").value;
             const keywords = document.getElementById("keywords").value.split(",").map((kw) => kw.trim());
             const background = document.getElementById("background").value;
-
+            const similarityScore = document.getElementById("similarity-score").value;
+            
             try {
                 // Call the API
                 const response = await fetch("/api/generate-profile", {
@@ -102,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         experience_level: experienceLevel,
                         keywords,
                         background,
+                        similarity_score_input: similarityScore,
                     }),
                 });
 
@@ -184,3 +186,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+function updateSliderLabel(value) {
+    const description = document.getElementById("slider-description");
+    document.getElementById("similarity-value").textContent = value;
+
+    if (value < 30) {
+        description.textContent = "Low threshold = Less relevent keywords";
+    } else if (value < 70) {
+        description.textContent = "Moderate threshold = Balanced keywords";
+    } else {
+        description.textContent = "High threshold = More relevent keywords";
+    }
+}
