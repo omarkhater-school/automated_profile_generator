@@ -37,6 +37,11 @@
                     <input type="text" id="keywords" name="keywords" placeholder="e.g., Python, Machine Learning">
                 </div>
 
+                <div class="form-group">
+                    <label for="background">Background (optional):</label>
+                    <textarea id="background" name="background" placeholder="Describe your background..."></textarea>
+                </div>
+
                 <button type="submit" class="button">Generate Profile</button>
             </form>
         </section>
@@ -54,20 +59,25 @@
                 <div class="accordion-item">
                     <button class="accordion-button">About Me</button>
                     <div class="accordion-content">
-                        <p id="about-me-content"></p>
+                        <p id="project-descriptions-content"></p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Retrieved Keywords Section -->
+
         <section id="retrieved-keywords-section" style="display: none;">
-            <h2>Retrieved Keywords</h2>
-            <div class="collapsible-container">
-                <button class="collapsible-button" id="toggle-keywords-button">Show Retrieved Keywords</button>
-                <div class="collapsible-content" id="retrieved-keywords-content" style="display: none;">
-                    <p></p>
-                </div>
+            <button id="toggle-keywords-button" class="button">Show Retrieved Keywords</button>
+            <div id="retrieved-keywords-content" style="display: none;">
+                <p></p>
+            </div>
+        </section>
+
+        <section id="reason-section" style="display: none;">
+            <button id="show-reason-button" class="button">Show Reason</button>
+            <div id="reason-content" style="display: none;">
+                <p></p>
             </div>
         </section>
 
