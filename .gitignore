@@ -3,3 +3,4 @@ config.py
 *.pyc
 /chromadb_store
 *.bin
+/output
