@@ -71,18 +71,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Profile Upgrade Form Submission
     const profileUpgradeForm = document.getElementById("profile-upgrade-form");
     const outputSection = document.getElementById("output-section");
+    const retrievedKeywordsSection = document.getElementById("retrieved-keywords-section");
     const elevatorPitchContent = document.getElementById("elevator-pitch-content");
-    const projectDescriptionsContent = document.getElementById("project-descriptions-content");
+    const aboutMeContent = document.getElementById("about-me-content");
+    const retrievedKeywordsContent = document.getElementById("retrieved-keywords-content");
 
     if (profileUpgradeForm) {
         profileUpgradeForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-    
+            e.preventDefault(); // Prevent default form submission
+
             // Collect input data
             const profession = document.getElementById("profession").value;
             const experienceLevel = document.getElementById("experience-level").value;
             const keywords = document.getElementById("keywords").value;
-    
+
             try {
                 // Call the API to generate the profile
                 const response = await fetch("/api/generate-profile", {
@@ -93,25 +95,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: JSON.stringify({
                         profession,
                         experience_level: experienceLevel,
-                        keywords: keywords.split(","),
+                        keywords: keywords.split(",").map((kw) => kw.trim()),
                     }),
                 });
-    
+
                 const data = await response.json();
-    
-                console.log("Parsed Response:", data);
-    
+
                 if (response.ok) {
-                    // Check if the elements exist
-                    if (elevatorPitchContent && projectDescriptionsContent) {
-                        outputSection.style.display = "block";
-                        elevatorPitchContent.innerHTML = data.profile.elevator_pitch;
-                        projectDescriptionsContent.innerHTML = data.profile.project_descriptions;
-                    } else {
-                        console.error(
-                            "Error: Required elements for displaying profile are missing in the DOM."
-                        );
-                    }
+                    // Display the output
+                    outputSection.style.display = "block";
+                    retrievedKeywordsSection.style.display = "block";
+
+                    // Set elevator pitch and About Me content
+                    elevatorPitchContent.innerHTML = data.profile.elevator_pitch || "No elevator pitch generated.";
+                    aboutMeContent.innerHTML = data.profile["About Me"] || "No About Me section generated.";
+
+                    // Set retrieved keywords in collapsible content
+                    const retrievedKeywords = data.profile.retrieved_keywords || "No keywords retrieved.";
+                    retrievedKeywordsContent.innerHTML = retrievedKeywords;
                 } else {
                     alert(`Error: ${data.error}`);
                 }
@@ -122,6 +123,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Add toggle functionality for collapsible sections
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("collapsible-button")) {
+            const content = event.target.nextElementSibling;
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        }
+    });
+    
     // Accordion Toggle
     document.querySelectorAll(".accordion-button").forEach((button) => {
         button.addEventListener("click", () => {

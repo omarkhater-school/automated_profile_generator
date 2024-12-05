@@ -76,7 +76,8 @@ def retrieve_skills():
     """API endpoint to retrieve trending skills."""
     try:
         profession = request.json.get("profession")
-        keywords = retrieve_skills_from_chroma(profession)
+        keywords = retrieve_skills_from_chroma(
+            profession, vectorstore, threshold = 1e-2)
         return jsonify({"keywords": keywords})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
