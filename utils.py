@@ -4,7 +4,7 @@ from langchain_chroma import Chroma
 from langchain_community.embeddings.ollama import OllamaEmbeddings
 from openai import OpenAI
 from config_loader import load_config
-
+import json
 def chat_gpt(prompt, client):
     """
     Generates a response using GPT-3.5 Turbo.
@@ -112,32 +112,15 @@ def generate_profile(user_input, vectorstore, client):
 
     all_keywords = list(set(user_keywords + trending_keywords))
     keywords_str = ", ".join(all_keywords) if all_keywords else "relevant skills and expertise"
-
-    if background:
-        prompt = (
-            f"Craft a highly engaging and personalized elevator pitch and a LinkedIn 'About Me' section for {profession}. "
-            f"The individual is a {experience_level} professional with the following background:\n{background}\n\n"
-            f"Use keywords such as {keywords_str}. Ensure the tone is confident, professional, and aspirational. "
-            f"Do not fabricate any details but fully utilize the provided background information and keywords. "
-            f"Focus on their professional expertise, unique qualities, and career goals. "
-            f"Make the profile appealing to recruiters, clients, and colleagues."
-        )
-    else:
-        prompt = (
-            f"Craft a highly engaging and personalized elevator pitch and a LinkedIn 'About Me' section for {profession}. "
-            f"The individual is a {experience_level} professional. "
-            f"Use keywords such as {keywords_str}. Ensure the tone is confident, professional, and aspirational. "
-            f"Since no specific background information is provided, focus on the keywords and profession to generate a relevant profile. "
-            f"Highlight professional expertise, potential unique qualities, and likely career goals. "
-            f"Make the profile appealing to recruiters, clients, and colleagues."
-        )
-
+    prompt = create_prompt(profession, experience_level, keywords_str, background)
+    generated_text = chat_gpt(prompt, client)
     try:
-        generated_text = chat_gpt(prompt, client)
+        response_json = json.loads(generated_text)
         return {
-            "elevator_pitch": generated_text.split("\n\n")[0],
-            "About Me": "\n\n".join(generated_text.split("\n\n")[1:]),
-            "retrieved_keywords": ", ".join(trending_keywords)
+            "elevator_pitch": response_json.get("elevator_pitch", "No elevator pitch generated."),
+            "About Me": response_json.get("About Me", "No About Me section generated."),
+            "retrieved_keywords": response_json.get("retrieved_keywords", "No keywords retrieved."),
+            "reason": response_json.get("reason", "No reason provided."),
         }
     except Exception as e:
         print(f"Error generating profile: {e}")
@@ -174,3 +157,33 @@ def get_client():
     from config import open_ai_api_key  # Import API key from config
     client = OpenAI(api_key=open_ai_api_key)
     return client
+
+def create_prompt(profession, experience_level, keywords_str, background):
+    if background:
+        prompt = (
+            f"Craft a highly engaging and personalized elevator pitch and a LinkedIn 'About Me' section for {profession}. "
+            f"The individual is a {experience_level} professional with the following background:\n{background}\n\n"
+            f"Use only the provided background to generate the content. Do not invent, assume, or fabricate any details. "
+            f"Strictly adhere to the information given in the background and use keywords such as {keywords_str} to enhance the relevance. "
+            f"Ensure the tone is confident, professional, and aspirational. "
+            f"Provide structured JSON output with the following keys:\n"
+            f"- 'elevator_pitch': A concise elevator pitch.\n"
+            f"- 'About Me': A detailed and engaging 'About Me' section.\n"
+            f"- 'retrieved_keywords': A list of keywords used.\n"
+            f"- 'reason': A unified and concise reason explaining why the outputs align with the provided background and keywords.\n"
+        )
+    else:
+        prompt = (
+            f"Craft a highly engaging and personalized elevator pitch and a LinkedIn 'About Me' section for {profession}. "
+            f"The individual is a {experience_level} professional. Since no specific background information is provided, "
+            f"focus on generating general content based on the profession and keywords such as {keywords_str}. "
+            f"Do not invent specific details about the individual's history. Maintain a general yet relevant tone. "
+            f"Ensure the tone is confident, professional, and aspirational. "
+            f"Provide structured JSON output with the following keys:\n"
+            f"- 'elevator_pitch': A concise elevator pitch.\n"
+            f"- 'About Me': A detailed and engaging 'About Me' section.\n"
+            f"- 'retrieved_keywords': A list of keywords used.\n"
+            f"- 'reason': A unified and concise reason explaining how the outputs were generated based on the keywords and profession.\n"
+        )
+
+    return prompt
