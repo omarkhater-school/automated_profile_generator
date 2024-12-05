@@ -1,4 +1,5 @@
-/* General Styles */
+/* ================== General Styles ================== */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -16,7 +17,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header */
+/* ================== Header ================== */
+
 header {
     text-align: center;
     margin-bottom: 2rem;
@@ -33,78 +35,47 @@ header p {
     color: #555;
 }
 
-/* Features Section */
-.features {
-    margin-bottom: 2rem;
-}
+/* ================== Form Styles ================== */
 
-.features h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.feature-list {
+form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-/* Feature Cards */
-.feature-card {
-    position: relative; /* Required for flag placement */
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-    width: 280px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.feature-card h3 {
-    font-size: 1.25rem;
-    color: #007bff;
-    margin-bottom: 0.5rem;
-}
-
-.feature-card h3 a {
-    text-decoration: none;
-    color: #007bff;
-}
-
-.feature-card h3 a:hover {
-    text-decoration: underline;
-}
-
-.feature-card p {
+label {
     font-size: 1rem;
-    color: #555;
-}
-
-/* Coming Soon Flag */
-.feature-card .flag {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ff4757;
-    color: white;
-    font-size: 0.75rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
     font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
 }
 
-/* Button Styles */
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+textarea::placeholder, input::placeholder {
+    color: #aaa;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+/* ================== Button Styles ================== */
+
 .button {
     display: inline-block;
     text-align: center;
@@ -129,163 +100,63 @@ header p {
     text-align: center;
 }
 
-/* Health Check Section */
-.health-check {
-    background: #f5f5f5;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
+/* ================== Range Input ================== */
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    height: 8px;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
 }
 
-.health-check h2 {
-    font-size: 1.5rem;
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #007bff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ================== Tabs ================== */
+
+.tabs {
+    display: flex;
+    gap: 1rem;
     margin-bottom: 1rem;
 }
 
-.health-check button {
+.tab-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 4px;
     transition: background-color 0.2s;
 }
 
-.health-check button:hover {
+.tab-button:hover {
     background-color: #0056b3;
 }
 
-.health-results {
-    list-style: none;
-    padding: 0;
-    margin-top: 1rem;
-    text-align: left;
-}
-
-.health-results li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
-}
-
-.health-results li:last-child {
-    border-bottom: none;
-}
-
-/* Feedback Section */
-.feedback {
-    margin-top: 2rem;
-    background: #f5f5f5;
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.feedback h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.feedback p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-#feedback-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.rating {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    direction: rtl; /* Align stars from right to left for proper highlighting */
-}
-
-.rating label {
-    font-size: 2rem;
-    color: #ddd; /* Default star color */
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-/* Highlight stars on hover */
-.rating label:hover,
-.rating label:hover ~ label {
-    color: #ffc107; /* Highlight color */
-}
-
-.rating input[type="radio"] {
-    display: none; /* Hide the actual radio buttons */
-}
-
-.rating input[type="radio"]:checked ~ label {
-    color: #ffc107;
-}
-
-/* Highlight stars when selected */
-.rating input[type="radio"]:checked ~ label {
-    color: #ffc107;
-}
-textarea {
-    width: 100%;
-    max-width: 600px;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    resize: vertical;
-}
-
-textarea::placeholder {
-    color: #aaa;
-}
-
-.feedback .button {
-    margin-top: 1rem;
-    width: 200px;
-}
-
-/* Stylish Form */
-.stylish-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background-color: #f5f5f5;
+.tab-content {
+    display: none;
+    background: #f9f9f9;
     padding: 1rem;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
-.stylish-form label {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 0.5rem;
-}
+/* ================== Accordion ================== */
 
-.stylish-form input, .stylish-form select {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.stylish-form input:focus, .stylish-form select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Accordion for Generated Profile */
 .accordion {
     display: flex;
     flex-direction: column;
@@ -324,7 +195,137 @@ textarea::placeholder {
     font-size: 1rem;
 }
 
-/* Active Accordion State */
 .accordion-item.active .accordion-content {
     display: block;
+}
+
+/* ================== Feature Cards ================== */
+
+.feature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.feature-card {
+    position: relative;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    width: 280px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card h3 a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.feature-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.feature-card .flag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ================== Feedback Section ================== */
+
+.feedback {
+    margin-top: 2rem;
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.feedback h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.feedback p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.feedback .button {
+    margin-top: 1rem;
+    width: 200px;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    direction: rtl;
+}
+
+.rating label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #ffc107;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating input[type="radio"]:checked ~ label {
+    color: #ffc107;
 }
