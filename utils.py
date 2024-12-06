@@ -5,7 +5,7 @@ from langchain_community.embeddings.ollama import OllamaEmbeddings
 from openai import OpenAI
 from config_loader import load_config
 import json
-def chat_gpt(prompt, client):
+def chat_gpt(prompt, client, model = "gpt-3.5-turbo"):
     """
     Generates a response using GPT-3.5 Turbo.
     
@@ -18,7 +18,7 @@ def chat_gpt(prompt, client):
     """
     try:
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model= model,
             messages=[{"role": "user", "content": prompt}]
         )
         return response.choices[0].message.content.strip()
@@ -51,7 +51,7 @@ def fetch_trending_keywords(profession, headers, max_keywords=10):
         print(f"Error fetching trending keywords for {profession}: {e}")
         return []
 
-def retrieve_skills_from_chroma(profession, vectorstore, threshold= 1e-5):
+def retrieve_skills_from_chroma(profession, vectorstore, threshold=1e-5):
     """
     Retrieve trending skills from ChromaDB for a given profession.
 
@@ -61,29 +61,37 @@ def retrieve_skills_from_chroma(profession, vectorstore, threshold= 1e-5):
         threshold (float): Minimum acceptable relevance score.
 
     Returns:
-        list: A list of trending keywords, or an empty list if none found.
+        tuple: A list of trending keywords, minimum similarity score, and maximum similarity score.
     """
     try:
         results = vectorstore.similarity_search_with_score(profession, k=50)
-        print(f"Results from similarity search: {results}")
+        # print(f"Results from similarity search: {results}")
 
         fetched_keywords = []
+        min_similarity = float('inf')  # Start with a very high value
+        max_similarity = float('-inf')  # Start with a very low value
 
         for result, similarity_score in results:
+            # Update the min and max similarity scores
+            if similarity_score < min_similarity:
+                min_similarity = similarity_score
+            if similarity_score > max_similarity:
+                max_similarity = similarity_score
+
             # Convert similarity score to relevance score
             relevance_score = 1 / (1 + similarity_score)
-            print(f"Similarity Score: {similarity_score:5f}, Relevance Score: {relevance_score:5f}, thresold: {threshold}")
+            # print(f"Similarity Score: {similarity_score:5f}, Relevance Score: {relevance_score:5f}, threshold: {threshold}")
 
             # Filter based on the relevance score threshold
             if relevance_score >= threshold:
                 keywords = eval(result.metadata.get('trending_keywords', '[]'))
                 fetched_keywords.extend(keywords)
 
-        # Deduplicate keywords and return
-        return list(set(fetched_keywords))
+        # Deduplicate keywords and return along with min and max similarity scores
+        return list(set(fetched_keywords)), min_similarity, max_similarity
     except Exception as e:
         print(f"Error retrieving skills from ChromaDB: {e}")
-        return []
+        return [], None, None
 
 
 def generate_profile(user_input, vectorstore, client):
@@ -107,7 +115,7 @@ def generate_profile(user_input, vectorstore, client):
     threshold_similarity = int(user_input.get("similarity_score_input", 50))
     threshold_relevance = 1 - (threshold_similarity / 100)
 
-    trending_keywords = retrieve_skills_from_chroma(
+    trending_keywords, min_score, max_score = retrieve_skills_from_chroma(
         profession, vectorstore, threshold = threshold_relevance)
     if not trending_keywords:
         print(f"Fetching trending keywords for {profession}...")
@@ -126,6 +134,8 @@ def generate_profile(user_input, vectorstore, client):
             "About Me": response_json.get("About Me", "No About Me section generated."),
             "retrieved_keywords": response_json.get("retrieved_keywords", "No keywords retrieved."),
             "reason": response_json.get("reason", "No reason provided."),
+            "similarity_scores": {"min_score": min_score, 
+                                  "max_score": max_score}
         }
     except Exception as e:
         print(f"Error generating profile: {e}")
