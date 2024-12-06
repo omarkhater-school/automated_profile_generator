@@ -1,0 +1,9 @@
+{
+    "evaluation": {
+        "keywords_quality": 100,
+        "relevance": 99,
+        "hallucination": 100,
+        "overall_quality": 100
+    },
+    "explanation": "The output perfectly matches the input. All of the keywords provided were present and used appropriately in the AI-generated output. The relevance is top-notch, meaning that the output very accurately portrays the profession and background that were provided. There is no instance of hallucination present, meaning the generated content stuck strictly to the information present in the input. As such, the high fidelity, relevance, and non-hallucination of the output justify a perfect overall quality score."
+}

@@ -1,0 +1,9 @@
+{
+    "evaluation": {
+        "keywords_quality": 90,
+        "relevance": 95,
+        "hallucination": 90,
+        "overall_quality": 92
+    },
+    "explanation": "The returned output demonstrates good use of keywords related to the input occupation and background information. The generated content is highly relevant to the profession and experience level as a Product Manager at the entry-level. The output did not invent unrelated information significantly, it maintained reasonable factual coherence. Thus, the overall quality of the output is excellent."
+}

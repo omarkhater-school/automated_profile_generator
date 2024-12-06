@@ -1,0 +1,17 @@
+{
+    "elevator_pitch": "As a recent graduate from a top university with a strong passion for technology, I am a highly motivated Business Intelligence Analyst with a focus on utilizing cutting-edge tools such as JavaScript and React to drive data-driven decision-making for organizations.",
+    "About Me": "I am a dynamic and analytical individual who thrives in leveraging data to provide valuable insights for business strategies. With a solid foundation in technology and a keen interest in frontend development, I am dedicated to utilizing my skills in JavaScript and React to enhance data visualization and streamline BI processes. I am eager to contribute my fresh perspective and enthusiasm to drive impactful results for companies looking to harness the power of data analytics.",
+    "retrieved_keywords": [
+        "technology",
+        "JavaScript",
+        "React",
+        "frontend",
+        "data-driven decision-making",
+        "Business Intelligence Analyst"
+    ],
+    "reason": "The elevator pitch and 'About Me' section highlight the individual's background as a recent graduate with a passion for technology, emphasizing their skills in JavaScript and React for frontend development. The keywords used align with the provided background, showcasing their interest in data-driven decision-making and their role as a Business Intelligence Analyst.",
+    "similarity_scores": {
+        "min_score": 106.40176391601562,
+        "max_score": 277.03228759765625
+    }
+}

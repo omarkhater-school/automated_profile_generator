@@ -10,3 +10,6 @@ paths:
   job_titles_csv: "./input/job_titles_diverse.csv"
   job_skills_dataset: "./output/job_skills_dataset.csv"
   persist_directory: "./chromadb_store"
+  logs_dir: "./output/logs"
+  output_dir: "./output"
+  input_dir: "./input"

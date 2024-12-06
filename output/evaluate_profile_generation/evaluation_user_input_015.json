@@ -1,0 +1,9 @@
+{
+    "evaluation": {
+        "keywords_quality": 95,
+        "relevance": 90,
+        "hallucination": 95,
+        "overall_quality": 93
+    },
+    "explanation": "The keywords are well drawn from the input and integrated nicely in the context of the DevOps profession. The generated profile reveals good relevance with the given profession, experience level, and background of cloud computing. There's very minimal hallucination as most information corresponds well with the inputs. The output exhibits high coherence, fluency and alignment with the input, thereby showcasing good overall quality."
+}

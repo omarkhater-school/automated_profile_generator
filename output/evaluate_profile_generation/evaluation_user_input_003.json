@@ -1,0 +1,9 @@
+{
+    "evaluation": {
+        "keywords_quality": 90,
+        "relevance": 90,
+        "hallucination": 90,
+        "overall_quality": 90
+    },
+    "explanation": "The keywords provided as well as the ones mentioned in 'retrieved_keywords' are fully matched and highly relevant, positioned accurately within the profession. The output elevator pitch and 'About Me' sections are highly consistent with the provided background details. A slight deduct in hallucination score due to the case that although similarity scores are provided, the low input similarity score of 70 and the resultant minimum similarity score of 105.19 show a mismatch."
+}
